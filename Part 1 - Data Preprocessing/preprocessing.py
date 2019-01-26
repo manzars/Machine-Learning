@@ -34,3 +34,12 @@ y = labelencoder_y.fit_transform(y)
 
 # Now to make lerning model accurate we have to divide our data into training and test dataset
 
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, random_state = 42)
+
+# Scaling data because if we compare two coloumn we get that data between ther differ with lagre number so we scale using standartization of normalization
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
