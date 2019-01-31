@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan 31 18:25:37 2019
+Created on Thu Jan 31 22:58:54 2019
 
 @author: manzars
 """
@@ -16,21 +16,15 @@ data = pd.read_csv("Position_Salaries.csv")
 X = data.iloc[:, 1:2].values
 y = data.iloc[:, 2].values
 
+from sklearn.tree import DecisionTreeRegressor
+regressor = DecisionTreeRegressor()
+regressor.fit(X, y,)
 
-scaler_x = StandardScaler()
-scaler_y = StandardScaler()
-X = scaler_x.fit_transform(X)
-y = scaler_y.fit_transform(y.reshape(-1,1))
-y = y.reshape(len(y))
-
-svr = SVR(kernel = "rbf")
-svr.fit(X,y)
+X_grid = np.arange(min(X), max(X), 0.001)
+X_grid = X_grid.reshape(-1,1)
 
 plt.scatter(X, y, color = "red")
-plt.plot(X, svr.predict(X), color = "blue")
+plt.plot(X_grid, regressor.predict(X_grid), color = "blue")
 plt.show()
 
-scaler_y.inverse_transform(svr.predict(scaler_x.transform(np.array(6.5).reshape(-1,1))))
-
-
-
+regressor.predict(np.array(6.5).reshape(-1,1))
