@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb  7 01:40:27 2019
+Created on Thu Feb  7 02:35:30 2019
 
 @author: manzars
 """
@@ -21,8 +21,8 @@ X = Scaler_X.fit_transform(X)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
 
-from sklearn.tree import DecisionTreeClassifier
-classifier = DecisionTreeClassifier(criterion = "entropy", random_state = 0)
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators = 10, criterion = "entropy", random_state = 0)
 classifier.fit(X_train, y_train)
 
 y_pred = classifier.predict(X_test)
@@ -40,7 +40,7 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], color = ListedColormap(('red', 'green'))(i), label = j)
-plt.title("Decision Tree Classifier")
+plt.title("Random Forest Classifier")
 plt.legend()
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
